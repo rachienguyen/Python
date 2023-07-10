@@ -1,0 +1,169 @@
+#INPUT() FUNCTION
+#Với hàm input thì Python không tập trung vào instruction/prompt mà chỉ tập trung vào giá trị mà user enter sau dấu : -> khi input(....) xuất hiện, prompt sẽ xuất hiện trên terminal
+name=input("Enter your name: ")
+print("Hi "+ name.title()+"!")
+#When the prompt is too long, we will store it in a variable
+prompt="Hey, if you tell me your name i can personalize your message"
+prompt+="\nWhat is your name?"   #+= là để nối tiếp cho câu ở trên cùng variable
+name=input(prompt)
+print("Hi"+name)
+#using int() to accept numerical input:
+#  if you ask Python to return the numerical value, it will return in string -> ( only number is to be like this )
+age=input("How old are you?")
+print(str(age))  # str() here is not very important because the numerical value is already in ""
+
+#USING INT() TO WORK WITH NUMERICAL VALUE IN STRING: "12"
+#if you want to work with the numercial value, instead of outputing it, use int()
+age=int(age)                                    
+if age>18:
+    print("You are old enough to vote!")
+else:
+    print("Sorry, you are not allowed to vote! ")
+
+#THE MODULO OPERATOR: hàm Module 
+number=input("Input your favourite number, we will tell you it is odd or even: ")
+number=int(number)
+if number%2==0:
+    print("The number "+str(number)+" is an evern. ")
+if number%2==1:
+    print("The number "+ str(number)+" is an odd. ")
+
+#Try it yourself
+rental_car=input("Kind of rental car that you would like: ")
+print("Let me see whether i can find you a "+rental_car)
+
+number_of_people=input("Number of people in your dinner group: ")
+number_of_people=int(number_of_people)
+if number_of_people>8:
+    print("You have to wait for a table.")
+else:
+    print("The table is available for you! ")
+
+number=input("Your number requested: ")
+number=int(number)
+if number%10==0:
+    print("The number"+str(number)+"is a mutiple of 10. ")
+else:
+    print("The number"+str(number)+"is not a mutiple of 10. ")
+
+
+#WHILE LOOPS : 
+
+#While loop là vòng lặp mà không biết trước về số lần lặp, lặp theo specific condition fulfilled, khi nào giá trị trong hàm dưới while không còn đúng
+#với while nữa thì dừng
+number=1
+while number<=5:
+    print(number)
+    number+=1
+#_How to stop a program in a right way of a while loop.
+prompt="\nTell me anything then i will repeat it to you: "
+prompt+="\nEnter 'quit' to end the program. "
+message=""                    #để biến trống không vừa để bắt đầu chương trình vừa để  tránh vòng lặp vô hạn 
+while message!='quit':
+    message=input(prompt)  # để vòng while được lặp lại, nếu không sẽ không có gì updated information để while được thực hiện
+    if message!='quit':  #thêm dòng này để ngừa print ra chữ'quit' trước khi dừng ctrinh   # nếu input 'quit' thì sẽ không có action nào cả và while cũng không thể tiếp tục vì while chỉ tiếp tục khi message khác quit
+     print(message)
+#_A flag in while loop: 
+#A program sometimes only runs when many conditions are true, and trying to test all conditions in while loop is complicated so there is one thing
+#can be used to test the program it is a flag, this is one variable determines whether the entire program can run or not-> Our while loop needs to check
+#only one condition: the flag is True or False. We can call the flag 'active' ( actually it is activeness -position of the flag)
+prompt="\nPlease enter something then i will repeat it: "
+prompt+="\nEnter 'quit' to stop the program. "
+message=""
+active= True
+while active:
+    message=input(prompt)    #When this exist, the the prompt will display in the terminal to wait for user to supply input -> default action of the input()
+    if message=='quit':   # Nếu message là quit thì active đổi sang trạng thái false-> while dừng, no action in the terminal
+        active= False   
+    else:                 # Nếu message không là quit thì print(message) và trạng thái active=True still holds-> while continues until message=='quit'
+        print(message)
+#_How to exist a While ( or any loop <for loop> ) loop immediately without running the remaining code and regardless of results of any conditional tests. ( in case of having no 
+# intermediary as flag in previous case)     
+prompt="\nPlease your favourite city then i will repeat it: "
+prompt+="\nEnter 'quit' to stop the program. "
+while True:
+    city=input(prompt)
+    if city=='quit':
+        break
+    else:
+        print(city.title())
+#_How to 'continue' in Loop:                                               #Not intutive ( Continue here is to continue the loop and skip the rest )
+#The 'continue" is used in a specific condition fulfilled to return to the beginning of the Loop and skipping the rest. When the condition is not fulfilled, then the rest of the loop is executed
+current_number=0
+while current_number<=10:
+    current_number+=1
+    if current_number%2==0:
+        continue
+    else:
+        print("Your current number is "+str(current_number)+" which is an odd. ")
+#_Avoiding INFINITE LOOPS:
+#If you want to avoid infinite loop, use Crtl+ C to stop. And if wanting to avoid writing infinite loops, check every while loops and make sure the loop stops as you expect it to.
+#For example 1: run the program and enter the value that makes the loops to stop (like 'quit' as previous codes), if this does not work, check the code that handles the value making the loop to stop 
+#For example 2: make sure that at least one part of the program can make the Loop condition False so that the Loop can stop or cause it to reach a' break statement' ( eg: code của phần flag)
+#code cho example 2:
+x=0
+while x<=10:
+    print(str(x))
+    x+=1  #trong tình huống này x+=1 là cái khiến 'can make the Loop to be False',nếu không có dòng code này thì  dẫn đến infinite loop
+
+#Try it yourself
+prompt="Please fill in the topping that you want for your pizza: "
+prompt+= "Enter the 'quit' to stop the program. "
+while True :
+    topping=input(prompt)
+    if topping=='quit':           #yêu cầu break to stop looping
+       break
+    else:
+       print("Adding "+topping.upper())
+
+prompt="\nPlease fill in your age: "
+prompt+="\nAnd please enter 'quit' when you finish. "
+while True:
+    age=input(prompt)
+    if age=='quit':       
+        break
+    elif int(age)<3:
+        price=0
+    elif int(age)>=3 and int(age)<=12:
+        price=10
+    elif int(age)>12:
+        price=15
+    print("Your ticket price is $"+str(price))
+
+prompt="Please fill in the topping that you want for your pizza: "
+prompt+= "Enter the 'quit' to stop the program. "
+active=True
+while active :
+    topping=input(prompt)
+    if topping=='quit':
+       active=False                 #yêu cầu sử dụng flag như trung gian để stop the loop and it is also in conditional test 
+    else:
+       print("Adding "+topping.upper())
+
+age=1
+while age>0:
+    print("This is an infinite loop")   
+#MOVING ITEMS FROM ONE LIST TO ANOTHER:
+unconfirmed_users=['Alice','Pink','John']
+confirmed_users=[]
+while users in unconfirmed_users:
+    users=unconfirmed_users.pop()
+    print("Verifying the user: "+users)
+
+
+ 
+
+
+
+    
+
+     
+
+
+    
+
+
+
+
+
+
